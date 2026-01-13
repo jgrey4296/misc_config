@@ -37,7 +37,7 @@
 (speckler-setq! bibtex ()
   librarian--biblio-edit-todo-loc        (expand-file-name "~/.config/bibliography/in_progress/todo.bib")
   librarian--biblio-edit-todo-files-loc  (expand-file-name "/media/john/data/todo/pdfs/")
-  librarian--biblio-edit-completions-loc (expand-file-name "~/.config/bibliography/completions/")
+  librarian--biblio-edit-completions-loc (expand-file-name "~/.config/homepage/submodules_/tags/completions/")
   librarian--biblio-edit-export-bib-loc  (expand-file-name "tex-config/tex/export_template.tex" templates-loc)
   librarian--biblio-edit-temp-tex-loc    (expand-file-name ".tex/" user-cache-dir)
   librarian--biblio-pdf-loc (pcase system-type

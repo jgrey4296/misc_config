@@ -3,7 +3,7 @@
 
 (defvar-keymap jg-binding-markdown-map)
 
-(map! :map jg-binding-helm-map
+(map! :map jge-helm-map
       :desc "Post Ivy" "p" #'+jg-markdown-post-ivy
 
       )

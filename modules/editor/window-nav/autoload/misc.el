@@ -10,6 +10,22 @@
 (defvar jg-window-temp-r "*temp-R*")
 
 ;;;###autoload
+(defun +jg-windows-2-col-right ()
+  (interactive)
+  (delete-other-windows)
+  (let* ((curr (current-buffer))
+         (left (selected-window))
+         (right (split-window-right))
+        )
+    (balance-windows)
+    (set-window-buffer left (get-buffer-create jg-window-temp-l))
+    (set-window-buffer right curr)
+    (select-window right)
+    )
+)
+
+
+;;;###autoload
 (defun +jg-windows-3-col-centered ()
   "Make the current buffer the center of 3, with 2 temp buffers "
   (interactive)

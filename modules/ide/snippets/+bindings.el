@@ -86,7 +86,7 @@
       )
 ;;-- end shell
 
-(map! :map jg-binding-normal-state-map
+(map! :map jge-normal-state-map
       :desc "breakpoint" "I b"   #'+jg-snippets-insert-debug
       :desc "Expand"     "t"     #'yas-expand-from-trigger-key
       )

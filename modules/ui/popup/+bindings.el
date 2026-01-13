@@ -1,6 +1,5 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-
 (map! :leader
       :desc "Popup Buffer"          "<"     #'+jg-popup-ivy-buffer
       :desc "Toggle last popup"     "`"   #'+popup/toggle
@@ -11,7 +10,7 @@
       :n "q" #'+popup/close
       )
 
-(map! :map jg-help-map
+(map! :map jgb-help-map
       :after jg-help-bindings
       "u ?" #'+popup/diagnose
       )
@@ -21,7 +20,6 @@
       :desc "Messages"                     "0" #'+jg-popup-messages
       )
 
-(setq popup-menu-keymap (make-keymap))
 (map! :map popup-menu-keymap
       "j" 'popup-next
       "k" 'popup-previous
@@ -32,6 +30,5 @@
       "\\" 'popup-isearch
       "?"  'popup-help
       )
-
 
 (global-set-key [remap quit-window] #'+popup/quit-window)

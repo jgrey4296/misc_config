@@ -1,8 +1,5 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-(defvar jg-help-map (make-sparse-keymap))
-(defvar jg-info-map (make-sparse-keymap))
-
 (add-hook 'jg-ui-transient-toggles-hook #'+jg-help-build-transient)
 
 (speckler-add! fold ()

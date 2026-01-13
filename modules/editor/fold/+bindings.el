@@ -1,16 +1,16 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-(map! :map jg-binding-jump-map
+(map! :map jgb-jump--text-map
       :desc "Jump to Auto-hide-heading" "h" #'code-shy-fold-jump-to-heading
       )
 
-(map! :map jg-binding-normal-state-map
+(map! :map jge-normal-state-map
       :desc "Toggle" "a" #'evil-toggle-fold
       :desc "open-fold-rec" "A"   #'evil-open-fold-rec
       )
 
-(map! :map jg-binding-vision-map
-      "?" #'+jg-fold/debug
+(map! :map jgb-vision--root-map
+      :desc "Debug folds"       "?" #'+jg-fold/debug
       :desc "Insert Fold block" "1" #'code-shy-wrap-block
 
       :desc "open-fold-rec" "A"   #'evil-open-fold-rec
@@ -26,7 +26,7 @@
       :desc "Mark Outline Subtree" "' o" #'outline-mark-subtree
       ;; TODO fold string
 )
-(map! :map jg-binding-vision-map
+(map! :map jgb-vision--root-map
       :after vimish-fold
       :prefix ("v" . "Vimish Fold")
        :desc "toggle-all"             "A"  #'vimish-fold-toggle-all
@@ -43,11 +43,11 @@
        :desc "previous-fold"          "k"  #'vimish-fold-previous-fold
       )
 
-(map! :map jg-binding-forward-operator-motion-map
+(map! :map jge-f-op-motion-map
       :desc "Fold Block"               "1" #'code-shy-forward-block
       )
 
-(map! :map jg-binding-backward-operator-motion-map
+(map! :map jge-b-op-motion-map
       :desc "Fold Block"               "1" #'code-shy-backward-block
 )
 

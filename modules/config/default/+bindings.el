@@ -1,13 +1,11 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-
-(map! :map jg-help-map
+(map! :map jgb-help-map
       :after jg-help-bindings
       :prefix ("s" . "Spec Handlers")
       "r" #'speckler-report!
       "d" #'speckler-describe!
       )
-
 
 (map! :leader
       :desc "Change Extension"  "b e"   #'+jg-default-change-ext
@@ -17,7 +15,6 @@
         :desc "Reveal in Finder"           "o f"     #'+macos/reveal-in-finder
         )
       )
-
 
 ;; OS specific fixes
 (when IS-MAC

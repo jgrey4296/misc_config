@@ -1,6 +1,6 @@
 ;;; +evil-normal-bindings.el -*- lexical-binding: t; -*-
 
-(map! :map jg-binding-normal-state-map ;; State Changes
+(map! :map jge-normal-state-map ;; State Changes
       "DEL" #'ignore
       :desc "Emacs State"         "C-z"      #'evil-emacs-state
       :desc "Run Macro"           "@"        #'evil-execute-macro
@@ -8,7 +8,7 @@
       :desc "Eval expression"     "\""       #'pp-eval-expression
       )
 
-(map! :map jg-binding-normal-state-map ;; switch to Insert+
+(map! :map jge-normal-state-map ;; switch to Insert+
       :desc "Insert Below"  "o"   #'evil-open-below
       :desc "Insert"        "i"   #'evil-insert
       :desc "Quoted"        "q"   #'quoted-insert
@@ -37,7 +37,7 @@
       :desc "General Insert"           "|"          #'ignore
       )
 
-(map! :map jg-binding-normal-state-map ;; switch to Visual
+(map! :map jge-normal-state-map ;; switch to Visual
       :desc "Visual"             "V"        #'evil-visual-line
       :prefix ("v" . "Visual+")
       :desc "buffer"             "RET" (cmd! (evil-visual-state) (mark-whole-buffer))
@@ -46,11 +46,11 @@
       :desc "char"               "l"       #'evil-visual-char
       :desc "Restore selection"  "h"       #'evil-visual-restore
 
-      :desc "Inner Select"       "i" (cmd! (evil-visual-char) (set-transient-map jg-binding-inner-text-objects-map))
-      :desc "Outer Select"       "o" (cmd! (evil-visual-char) (set-transient-map jg-binding-outer-text-objects-map))
+      :desc "Inner Select"       "i" (cmd! (evil-visual-char) (set-transient-map jge-inner-txtobj-map))
+      :desc "Outer Select"       "o" (cmd! (evil-visual-char) (set-transient-map jge-outer-txtobj-map))
       )
 
-(map! :map jg-binding-normal-state-map ;; paste
+(map! :map jge-normal-state-map ;; paste
       :desc "Paste After"        "p"   #'evil-paste-after
       :prefix ("P" . "Paste")
       :desc "Paste After"        "l"   #'evil-paste-after
@@ -59,7 +59,7 @@
       :desc "From Register"      "r"   #'evil-paste-from-register
       )
 
-(map! :map jg-binding-normal-state-map ;; Commands
+(map! :map jge-normal-state-map ;; Commands
       :desc "Use Register"       "'"   #'evil-use-register
       :desc "Join"               "J"   #'evil-join
       ;; K
@@ -80,7 +80,7 @@
       :desc "Yank-line"          "Y"   #'evil-yank-line
       )
 
-(map! :map jg-binding-normal-state-map ;; chords
+(map! :map jge-normal-state-map ;; chords
       :desc "Repeat Pop"      "C-."          #'evil-repeat-pop
       :desc "Paste Pop Next"  "C-n"          #'evil-paste-pop-next
       :desc "Paste Pop"       "C-p"          #'evil-paste-pop

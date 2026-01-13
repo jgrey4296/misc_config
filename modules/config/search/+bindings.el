@@ -12,7 +12,7 @@
         )
       )
 
-(map! :map jg-binding-jump-map
+(map! :map jgb-jump-text-map
       :desc "Open to visible link"         "," #'link-hint-open-link
       (:prefix "/"
        :desc "Jump to link"                 "L" #'ffap-menu

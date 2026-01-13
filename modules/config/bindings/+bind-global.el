@@ -14,21 +14,19 @@
       :n "q" #'quit-window
       )
 
-;; Consistently use q to quit windows
 (after! tabulated-list
-  (define-key tabulated-list-mode-map "q" #'quit-window))
+  ;; Consistently use q to quit windows
+  (define-key tabulated-list-mode-map "q" #'quit-window)
+  )
 
-;;-- evil overrides/intercept
+
+(setq esc-map (make-keymap "esc-map")
+      lisp-mode-shared-map (make-sparse-keymap "lisp-mode-shared-map")
+      ctl-x-map jgb-ctl-x-map
+      )
+
 (evil-make-overriding-map messages-buffer-mode-map)
 (evil-make-intercept-map read-expression-map)
-
-;;-- end evil overrides/intercept
-
-(setq esc-map (make-keymap)
-      lisp-mode-shared-map (make-sparse-keymap)
-      ctl-x-map jg-ctl-x-map
-      )
-;; (use-global-map global-map)
-
 (keymap-global-set "C-c u" #'universal-argument)
+
 (provide 'jg-global-bindings)

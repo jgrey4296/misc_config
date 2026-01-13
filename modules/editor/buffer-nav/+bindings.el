@@ -7,7 +7,7 @@
       :desc "Popup Scratch"  "s" #'scratch-buffer
       )
 
-(map! :map jg-binding-jump-map
+(map! :map jgb-jump--root-map
       :desc "Paren State"            "p"   #'evil-parenM-state
       :desc "Jump Back"              "b"   #'better-jumper-jump-backward
       :desc "Jump Next"              "n"   #'better-jumper-jump-forward
@@ -21,12 +21,11 @@
       "SPC" doom-leader-map
       )
 
-(map! :map jg-binding-vision-map
+(map! :map jgb-vision--text-map
       ";" #'+jg-buffer-nav-make-read-only-segment
       )
 
-(map! :map jg-binding-change-map
-      :prefix ("b" . "Buffer")
-      :desc "Lock Buffer"        "l" #'emacs-lock-mode
-      :desc "Change Buffer Name" "n" #'rename-buffer
+(map! :map jgb-change--root-map
+      :desc "Lock Buffer"        "b l" #'emacs-lock-mode
+      :desc "Change Buffer Name" "b n" #'rename-buffer
       )

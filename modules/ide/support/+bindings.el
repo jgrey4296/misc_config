@@ -1,29 +1,5 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-;;-- map defs
-
-(defvar jg-lsp-mode-map           (make-sparse-keymap))
-
-(defvar jg-lsp-command-map        (make-sparse-keymap))
-
-(defvar jg-lsp-signature-mode-map (make-sparse-keymap))
-
-(defvar jg-lsp-ui-imenu-mode-map  (make-sparse-keymap))
-
-(defvar jg-lsp-ui-peek-mode-map   (make-sparse-keymap))
-
-(defvar tree-sitter-mode-map (make-sparse-keymap))
-
-(defvar +tree-sitter-inner-text-objects-map (make-sparse-keymap))
-
-(defvar +tree-sitter-outer-text-objects-map (make-sparse-keymap))
-
-(defvar +tree-sitter-goto-previous-map (make-sparse-keymap))
-
-(defvar +tree-sitter-goto-next-map (make-sparse-keymap))
-
-;;-- end map defs
-
 (evil-make-overriding-map jg-lsp-mode-map)
 
 (map! :leader
@@ -203,7 +179,7 @@
 ;;-- end treesit
 
 ;;-- gtags
-(map! :map jg-binding-jump-map
+(map! :map jgb-jump--root-map
       :prefix ("g" . "gtags")
       :desc "Create Tags"           "c" #'helm-gtags-create-tags
       :desc "Find Symbol"           "y" #'helm-gtags-find-symbol

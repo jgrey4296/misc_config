@@ -1,5 +1,6 @@
 ;;; completion/ivy/+bindings.el -*- lexical-binding: t; -*-
 
+
 (dlog! "Setting up Completion bindings: %s" (current-time-string))
 (with-state! 'normal #'ivy-resume)
 (with-state! 'normal #'counsel-minibuffer-history)
@@ -10,7 +11,6 @@
 (with-state! 'normal #'counsel-evil-marks)
 (with-state! 'normal #'counsel-list-processes)
 (with-state! 'normal #'counsel-register :no-args t)
-
 (with-state! 'normal #'+jg-ivy-evil-registers)
 
 
@@ -26,7 +26,7 @@
       )
 
 ;;-- ivy
-(map! :map jg-binding-jump-map
+(map! :map jgb-jump--root-map
       :desc "Ivy resume"            "`"   #'ivy-resume--with-state-normal
       )
 
@@ -49,28 +49,28 @@
       :desc "From Minibuffer history"      "i m"   #'counsel-minibuffer-history--with-state-normal
       )
 
-(map! :map jg-binding-normal-state-map
+(map! :map jge-normal-state-map
       :prefix "I"
        :desc "From evil register" "0" #'+jg-ivy-evil-registers--with-state-normal
        "m" #'counsel-minibuffer-history--with-state-normal
        "y" #'counsel-yank-pop--with-state-normal
       )
 
-(map! :map jg-binding-insert-state-map
+(map! :map jge-insert-state-map
       "C-x c"   #'counsel-unicode-char
       "C-c c"   #'counsel-unicode-char
       "C-c SPC" #'counsel-unicode-char
       )
 
-(map! :map jg-binding-jump-map
+(map! :map jgb-jump--root-map
       :desc "Search current directory"    "/ d"  #'+ivy/project-search-from-cwd
       )
 
-(map! :map jg-help-map
+(map! :map jgb-help-map
       :desc "Command History"              "L"  #'counsel-command-history--with-state-normal
       )
 
-(map!
+(map! ;; remaps
       [remap yank-pop]                      #'counsel-yank-pop--with-state-normal
       [remap evil-show-registers]           #'+jg-ivy-evil-registers--with-state-normal
       [remap evil-show-marks]               #'counsel-evil-marks--with-state-normal
@@ -119,7 +119,7 @@
 
 ;;-- end lisp
 
-(map! :map jg-binding-change-map
+(map! :map jgb-change--root-map
       :desc "Change Mode" "m"       #'+jg-ivy-change-major-mode
       :desc "Change Minor Mode" "M" #'+jg-ivy-change-minor-mode
       )

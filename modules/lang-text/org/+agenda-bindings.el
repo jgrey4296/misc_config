@@ -10,7 +10,7 @@
 (defvar-keymap jg-org-agenda-diary-keymap)
 
 (define-prefix-command 'jg-org-agenda-meta-submap nil "jgoa-meta-map")
-(set-keymap-parent jg-org-agenda-meta-submap jg-binding-halting-keymap)
+(set-keymap-parent jg-org-agenda-meta-submap jgb-halting-keymap)
 (evil-make-overriding-map jg-org-agenda-meta-submap)
 
 (map! :map jg-org-agenda-mode-map ;; main

@@ -1,6 +1,6 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
 
-(map! :localleader
-      :map +dap-running-session-mode-map
+(map! :map +dap-running-session-mode-map
+      :localleader
       "d" #'dap-hydra)

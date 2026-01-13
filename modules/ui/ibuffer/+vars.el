@@ -78,11 +78,11 @@
   )
 
 ;;-- maps
-(defvar jg-ibuffer-mode-map   (make-keymap))
+(def-named-keymap! jg-ibuffer-mode-map)
 
-(defvar jg-ibuffer-filter-map (make-sparse-keymap))
+(def-named-keymap! jg-ibuffer-filter-map :sparse t)
 
-(defvar jg-ibuffer-sort-map   (make-sparse-keymap))
+(def-named-keymap! jg-ibuffer-sort-map   :sparse t)
 
-(defvar jg-ibuffer-mark-map   (make-sparse-keymap))
+(def-named-keymap! jg-ibuffer-mark-map   :sparse t)
 ;;-- end maps

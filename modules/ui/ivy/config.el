@@ -34,7 +34,7 @@
     [remap evil-show-jumps]               #'+ivy/jump-list)
 
   ;; Fix #4886: otherwise our remaps are overwritten
-  (setq ivy-mode-map (make-sparse-keymap))
+  (def-named-keymap! ivy-mode-map :sparse t)
 
   :config
   ;; Counsel changes a lot of ivy's state at startup; to control for that, we

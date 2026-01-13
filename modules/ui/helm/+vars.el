@@ -1,6 +1,6 @@
 ;;; completion/ivy/+vars.el -*- lexical-binding: t; -*-
 
-(defvar jg-helm-map (make-sparse-keymap))
+(def-named-keymap! jg-helm-map :sparse t)
 
 ;;-- personal-vars
 

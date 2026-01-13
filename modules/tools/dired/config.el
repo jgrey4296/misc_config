@@ -1,5 +1,6 @@
 ;;; tools/dired/config.el -*- lexical-binding: t; -*-
 
+(local-load! "+defines")
 (defer-load! (jg-bindings-total jg-dired) "+bindings")
 (defer-load! "+extra")
 (defer-load! "+dirvish")

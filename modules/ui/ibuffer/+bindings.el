@@ -159,4 +159,5 @@
       "\\" jg-ibuffer-filter-map
       "o"  jg-ibuffer-sort-map
       )
+
 (setq ibuffer-mode-map jg-ibuffer-mode-map)

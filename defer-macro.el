@@ -103,3 +103,32 @@
        )
      )
   )
+
+(defmacro def-keymap-subtypes! (varname &rest substates)
+  "Create a set of keymaps of the form {varname}-{substate}-map,
+with a {varname}-root-map as the parent of them.
+"
+  (let* ((root (format "%s--root-map" varname))
+        (subs (cl-loop for x in substates
+                       for name = (format "%s--%s-map" varname x)
+                       collect
+                       `(defvar ,(intern name)
+                          (make-sparse-keymap ,name))
+                       collect
+                       `(set-keymap-parent ,(intern name) ,(intern root))
+                       ))
+        )
+    `(progn
+      (defvar ,(intern root) (make-keymap ,root))
+      ,@subs
+      )
+    )
+  )
+
+(cl-defmacro def-named-keymap! (varname &key (sparse . nil))
+  "Create a named keymap"
+  (if sparse
+      `(defvar ,varname (make-sparse-keymap ,(format "%s" varname)))
+    `(defvar ,varname (make-keymap ,(format "%s" varname)))
+    )
+  )

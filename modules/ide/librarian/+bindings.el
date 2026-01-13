@@ -9,9 +9,7 @@
 
 ;; --------------------------------------------------
 
-
 (map! :map librarian-mode-map
-       :i "s" #'self-insert-command
        :n "|" #'librarian-insert-trigger
       (:prefix "s"
        :desc "Browse URL"                :n "u" #'librarian-url
@@ -40,6 +38,8 @@
         :desc "Local Variables"            :n    "L" #'librarian-buffer-locals
         )
        )
+
+      :i "s" #'self-insert-command
       )
 
 (map! :map librarian-mode-map
@@ -50,7 +50,7 @@
 
 ;; --------------------------------------------------
 
-(map! :map jg-binding-normal-state-map
+(map! :map jge-normal-state-map
       :desc "Lookup"           "K"   #'librarian-documentation
       :desc "General Insert"   "I |" #'librarian-insert-trigger
       )
@@ -67,7 +67,7 @@
       :n "|" #'librarian-insert-trigger
       )
 
-(map! :map jg-help-map
+(map! :map jgb-help-map
       :after jg-help-bindings
       :desc "Man"                         "d m"  #'librarian-man
       :desc "Emacs Version Config"        "p v"  #'librarian-system-config

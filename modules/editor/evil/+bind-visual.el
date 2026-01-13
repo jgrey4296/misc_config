@@ -1,6 +1,6 @@
 ;;; +evil-visual-state-bindings.el -*- lexical-binding: t; -*-
 
-(map! :map jg-binding-visual-state-map ;; enter/exit
+(map! :map jge-visual-state-map ;; enter/exit
       [escape] 'evil-normal-state
       :prefix ("v" . "Visual")
       :desc "buffer"       "RET"           #'mark-whole-buffer
@@ -10,7 +10,7 @@
       :desc "exit"         "v"             #'evil-normal-state
       )
 
-(map! :map jg-binding-visual-state-map
+(map! :map jge-visual-state-map
       :desc "Replace Selection"       "R"   #'evil-change
       :desc "Exchange Corners"        "A"   #'evil-visual-exchange-corners
       :desc "Exchange Point and Mark" "a"   #'exchange-point-and-mark

@@ -1,12 +1,12 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-(map! :map jg-binding-normal-state-map
+(map! :map jge-normal-state-map
       :after undo-fu
       :desc "undo" "u" 'undo-fu-only-undo
       :desc "redo" "U" 'undo-fu-only-redo
       )
 
-(map! :map jg-binding-operator-map
+(map! :map jge-operator-map
       :desc "Vundo"                       "u" #'vundo
       )
 

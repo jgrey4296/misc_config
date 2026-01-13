@@ -105,7 +105,7 @@
       [f1]      nil
          )
 
-(map! :map jg-binding-insert-state-map
+(map! :map jge-insert-state-map
       ;; "TAB" #'+jg-snippets-complete-or-snippet
       "TAB" #'company-complete
       ;; "TAB" #'indent-for-tab-command

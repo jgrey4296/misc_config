@@ -16,3 +16,14 @@
 If this list begins with `not', then it negates the list.
 If it is t, it is enabled in all modes.
 If nil, it is disabled in all modes")
+
+(def-named-keymap! jg-lsp-mode-map)
+(def-named-keymap! jg-lsp-command-map)
+(def-named-keymap! jg-lsp-signature-mode-map)
+(def-named-keymap! jg-lsp-ui-imenu-mode-map)
+(def-named-keymap! jg-lsp-ui-peek-mode-map)
+(def-named-keymap! tree-sitter-mode-map)
+(def-named-keymap! +tree-sitter-inner-text-objects-map)
+(def-named-keymap! +tree-sitter-outer-text-objects-map)
+(def-named-keymap! +tree-sitter-goto-previous-map)
+(def-named-keymap! +tree-sitter-goto-next-map)

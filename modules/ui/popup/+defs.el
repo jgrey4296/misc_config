@@ -34,3 +34,5 @@ adjustment.")
 (defvar +popup--last                     nil)
 
 (defvar-local +popup--timer              nil)
+
+(def-named-keymap! popup-menu-keymap)

@@ -2,10 +2,14 @@
 
 (defvar jg-text-last-similarity-arg 1)
 
+
 ;;-- formatting
 
-(defvar-local jg-text-whitespace-clean-hook '(#'delete-trailing-whitespace
-                                              #'+jg-text-cleanup-whitespace)
+(defvar-local jg-text-whitespace-clean-hook
+    '(
+      #'delete-trailing-whitespace
+      #'+jg-text-cleanup-whitespace
+      )
   )
 
 (defvar +word-wrap-extra-indent 'double
@@ -41,16 +45,26 @@ will not be affected.")
 `adaptive-wrap-prefix-mode'.")
 
 (defvar +word-wrap-text-modes
-  '(text-mode markdown-mode markdown-view-mode gfm-mode gfm-view-mode rst-mode
-    latex-mode LaTeX-mode)
+  '(
+    text-mode
+    markdown-mode
+    markdown-view-mode
+    gfm-mode
+    gfm-view-mode
+    rst-mode
+    latex-mode
+    LaTeX-mode
+    )
   "Major-modes where `+word-wrap-mode' should not provide extra indentation.")
 
 (defvar +format-on-save-enabled-modes
-  '(not emacs-lisp-mode    ; elisp's mechanisms are good enough
-    sql-mode           ; sqlformat is currently broken
-    tex-mode           ; latexindent is broken
+  '(
+    not emacs-lisp-mode    ; elisp's mechanisms are good enough
+    sql-mode               ; sqlformat is currently broken
+    tex-mode               ; latexindent is broken
     latex-mode
-    org-msg-edit-mode) ; doesn't need a formatter
+    org-msg-edit-mode      ; doesn't need a formatter
+    )
   "A list of major modes in which to reformat the buffer upon saving.
 
 If this list begins with `not', then it negates the list.

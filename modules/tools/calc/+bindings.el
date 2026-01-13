@@ -6,7 +6,6 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
-
 (map! :map jg-calc-mode-map ;; prefixs
       (:prefix ("a" . "algebra"))
       (:prefix ("f" . "funcs"))
@@ -71,6 +70,7 @@
       ;; calc-keep-args
       ;; calc-last-args
       )
+
 (map! :map jg-calc-mode-map ;; numbers
       :n "e" 'calcDigit-start
       :n "." 'calcDigit-start
@@ -91,7 +91,7 @@
       ;; :n "9" 'calcDigit-start
       )
 
-(map! :map jg-calc-map      ;; algebra
+(map! :map jg-calc-mode-map ;; algebra
       :prefix ("A" . "Algebra")
       ;; "\"" 'calc-auto-algebraic-entry
       ;; "$"  'calc-auto-algebraic-entry
@@ -140,6 +140,7 @@
       ;; calc-rewrite-selection
       ;; calc-match
       )
+
 (map! :map jg-calc-mode-map ;; functions
       :prefix ("f" . "funcs")
       (:prefix ("f" . "financial")
@@ -704,7 +705,6 @@
       )
 
 ;; (setq calc-mode-map jg-calc-mode-map)
-
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

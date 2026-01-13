@@ -1,35 +1,6 @@
 ;;; +evil-motion-bindings.el -*- lexical-binding: t; -*-
 
-(map! :map jg-binding-forward-general-motion-map
-      :desc "Next Section"            "]" #'evil-forward-section-begin
-      :desc "To Section End"          "[" #'+evil/next-end-of-method
-      :desc "Arg"                     "a" #'evil-forward-arg
-      :desc "Next File in Dir, alpha" "f" #'+evil/next-file
-      :desc "Heading"                 "h" #'outline-next-visible-heading
-      :desc "Begin Method"            "m" #'+evil/next-beginning-of-method
-      :desc "End Method"              "M" #'+evil/next-end-of-method
-      :desc "Todo"                    "t" #'hl-todo-next
-      :desc "Buffer"                  "b" #'next-buffer
-      :desc "Comment"                 "c" #'+evil/next-comment
-      :desc "Error"                   "e" #'next-error
-      :desc "Paragraph"               "p" #'forward-paragraph
-      )
-
-(map! :map jg-binding-backward-general-motion-map
-      :desc "Section"                     "[" #'evil-backward-section-begin
-      :desc "Section End"                 "]" #'evil-backward-section-end
-      :desc "Buffer"                      "b" #'previous-buffer
-      :desc "Comment"                     "c" #'+evil/previous-comment
-      :desc "Previous File in Dir, alpha" "f" #'+evil/previous-file
-      :desc "Error"                       "e" #'previous-error
-      :desc "Heading"                     "h" #'outline-previous-visible-heading
-      :desc "Begin Method"                "m" #'+evil/previous-beginning-of-method
-      :desc "End Method"                  "M" #'+evil/previous-end-of-method
-      :desc "Todo"                        "t" #'hl-todo-previous
-      :desc "Paragraph"                   "p" #'backward-paragraph
-      )
-
-(map! :map jg-binding-motion-state-map ;; basic
+(map! :map jge-motion-state-map ;; basic
       :desc "backward-char"         "h"       #'evil-backward-char
       :desc "next-line"             "j"       #'evil-next-line
       :desc "previous-line"         "k"       #'evil-previous-line
@@ -39,7 +10,7 @@
       :desc "Search"                 "/"       #'evil-ex-search-forward
       )
 
-(map! :map jg-binding-motion-state-map ;; word, sen, para, line
+(map! :map jge-motion-state-map ;; word, sen, para, line
       ;; Char
       :desc "find-char"             "f"       #'evil-find-char
       ;; :desc "find-char-to"          "t"       #'evil-find-char-to
@@ -72,7 +43,7 @@
       :desc "window-top"            "H"       #'evil-window-top
       )
 
-(map! :map jg-binding-motion-state-map
+(map! :map jge-motion-state-map
       :desc "Escape"                 "Q"       #'evil-escape
       :desc "Goto Mark"              "`"       #'evil-goto-mark
       :desc "Jump Item"              "%"       #'evil-jump-item

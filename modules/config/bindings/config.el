@@ -1,8 +1,9 @@
 ;;; config/default/config.el -*- lexical-binding: t; -*-
 
+(local-load! "+defines")
 (local-load! "+vars")
 
-(defer-load! (evil faster-whichkey) "+bindings" "+misc") ;; -> jg-bindings-core
+(defer-load! (evil faster-whichkey) "+bindings") ;; -> jg-bindings-core
 
 (after! (jg-evil-bindings which-key jg-bindings-core)
   (provide 'jg-bindings-total)

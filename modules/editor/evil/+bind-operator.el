@@ -1,6 +1,6 @@
 ;; +op-bindings.el -*- lexical-binding: t; -*-
 
-(map! :map jg-binding-operator-state-map
+(map! :map jge-operator-state-map
       [escape] 'evil-normal-state
       :desc "Escape"                 "C-g"     #'evil-escape
       :desc "EOL"                    "$"       #'evil-end-of-visual-line
@@ -11,7 +11,7 @@
       :desc "Forward Char"           "l"       #'evil-forward-char
       )
 
-(map! :map jg-binding-backward-operator-motion-map
+(map! :map jge-b-op-motion-map
       ;; RET ] l r
       :desc "Section"      "["   #'evil-backward-section-begin
       :desc "Arg"          "a"   #'evil-backward-arg
@@ -20,7 +20,7 @@
       :desc "Sentence"     "s"   #'evil-backward-sentence-begin
       )
 
-(map! :map jg-binding-forward-operator-motion-map
+(map! :map jge-f-op-motion-map
       ;; r RET l [
       :desc "Section"      "]" #'evil-forward-section-begin
       :desc "Arg"          "a" #'evil-forward-arg
@@ -30,7 +30,7 @@
       :desc "Sentence"     "s" #'evil-forward-sentence-begin
       )
 
-(map! :map jg-binding-operator-map
+(map! :map jge-operator-map
       ;; g > s
       :desc "Repeat Global Sub"   "7"   #'evil-ex-repeat-global-substitute
 

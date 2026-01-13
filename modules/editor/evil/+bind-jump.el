@@ -1,17 +1,16 @@
 ;;; +jump-map.el -*- lexical-binding: t; -*-
 
-(map! :map jg-binding-jump-map ;; groups
-      (:prefix ("d" . "Dirs"))
+(map! :map jge-jump-map ;; groups
       (:prefix ("k" . "Documentation"))
       (:prefix ("g" . "gtags"))
       (:prefix ("/" . "Search"))
       )
 
-(map! :map jg-binding-jump-map ;; avy
+(map! :map jge-jump-map ;; avy
       ;; 1 2 3 "u" "h"
       ;; :desc "Ivy resume"            "`"   #'ivy-resume
       "c" #'ignore
-      :desc "helms"                 "a"   jg-binding-helm-map
+      :desc "helms"                 "a"   jge-helm-map
       :desc "Last Change"           ";"   #'goto-last-change
       :desc "Jump to Char"          "."   #'avy-goto-char
       :desc "Line"                  "l"   #'evil-avy-goto-line
@@ -28,7 +27,7 @@
       :desc "Search buffer"         "s"   #'isearch-forward
       )
 
-(map! :map jg-binding-jump-map ;; search
+(map! :map jge-jump-map ;; search
       :prefix ("/" . "Search")
       :desc "Search Clear"                "c"         #'evil-ex-nohighlight
       :desc "Find File at point"          "F"         #'evil-find-file-at-point-with-line

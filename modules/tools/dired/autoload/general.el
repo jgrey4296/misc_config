@@ -227,3 +227,9 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
       )
     )
   )
+
+;;;###autoload
+(defun +jg-dired-group-helper ()
+  (interactive)
+  (message "Dired Groups: (M)ark, (c)hange, (d)escribe, (o)pen, (e)ncrypt, (s)ort ")
+  )

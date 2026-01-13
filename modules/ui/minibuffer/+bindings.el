@@ -1,6 +1,6 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-(map! :map jg-binding-normal-state-map
+(map! :map jge-normal-state-map
       :desc "From Minibuffer history"  "I m"          #'counsel-minibuffer-history--with-state-normal
       )
 

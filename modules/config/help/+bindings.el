@@ -1,14 +1,14 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-(define-prefix-command 'jg-help-map nil "jgb-help")
+;; (define-prefix-command 'jgb-help-map nil "jgb-help")
 
 (map! :leader
-      :desc "help"            "h" jg-help-map
+      :desc "help" "h" jgb-help-map
       )
 
-(map! :g "C-x h" jg-help-map)
+(map! :g "C-x h" jgb-help-map)
 
-(map! :map jg-help-map
+(map! :map jgb-help-map
       :desc "Describe CHAR"    "'"       #'describe-char
       :desc "Describe FUNC"    "f"       #'describe-function
       :desc "Describe VAR"     "v"       #'describe-variable
@@ -23,7 +23,7 @@
       )
 
 ;;-- debug
-(map! :map jg-help-map
+(map! :map jgb-help-map
       :prefix ("D" . "Debug")
       ;; :desc "Describe Buffer"          "b" #'+jg-default-debug-buffer-state
       :desc "Debug Snippet Insert"     "s" #'+jg-snippets-insert-debug
@@ -38,7 +38,7 @@
 ;;-- end debug
 
 ;;-- docs
-(map! :map jg-help-map
+(map! :map jgb-help-map
       :prefix ("d" . "docs")
       :desc "Info Manual"                 "i" #'info-display-manual
       "a" #'doom/help-autodefs
@@ -71,7 +71,7 @@
 ;;-- end docs
 
 ;;-- ui
-(map! :map jg-help-map
+(map! :map jgb-help-map
       :prefix ("u" . "UI")
       "b" #'describe-bindings
       "C" #'describe-coding-system
@@ -86,7 +86,7 @@
 ;;-- end ui
 
 ;;-- bindings
-(map! :map jg-help-map
+(map! :map jgb-help-map
       :prefix ("b" . "Bindings")
       "a" #'+jg-help-describe-active-maps
       "b" #'describe-bindings
@@ -101,7 +101,7 @@
 ;;-- end bindings
 
 ;;-- reloading
-(map! :map jg-help-map
+(map! :map jgb-help-map
       ;; replacement keybinds
       :prefix ("r" . "Reload")
       :desc "Reload"           "r"   #'doom/reload
@@ -115,7 +115,7 @@
 ;;-- end reloading
 
 ;;-- packages
-(map! :map jg-help-map
+(map! :map jgb-help-map
       :desc "System Package Locs" "P" #'+jg-help-list-package-locs
       :prefix ("p" . "Packages")
       :desc "Sraight Repos"                      "1" (cmd! (find-file (expand-file-name "straight/repos" straight-base-dir)))
@@ -180,7 +180,7 @@
 
 (setq help-mode-map (make-sparse-keymap)
       Info-mode-map jg-info-map
-      help-map jg-help-map
+      help-map jgb-help-map
       )
 
 (provide 'jg-help-bindings)

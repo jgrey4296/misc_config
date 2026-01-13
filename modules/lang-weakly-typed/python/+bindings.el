@@ -31,7 +31,7 @@
       ;; :desc "REPL"             "r"   #'+jg-python/open-ipython-repl
       :desc "track"            ";"   #'+jg-python-toggle-pdbtrack
       :desc "breakpoint"       "b"   #'+jg-python-breakpoint-line
-      :desc "Disaspemble"      "D"   #'+jg-python-bytecode-dwim
+      :desc "Disassemble"      "D"   #'+jg-python-bytecode-dwim
       :desc "debug"            "d" (cmd! (setq jg-python-dev-mode (not jg-python-dev-mode))
                                           (message "Python Debug Mode: %s" jg-python-dev-mode))
       )
@@ -113,7 +113,8 @@
       :after cython-mode
       :localleader
       (:prefix "c"
-      :desc "Cython compile buffer"    "c" #'cython-compile))
+       :desc "Cython compile buffer"    "c" #'cython-compile)
+      )
 
 (map! :map anaconda-mode-map
       :after anaconda-mode

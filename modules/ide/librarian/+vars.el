@@ -13,8 +13,8 @@
   librarian--man-config                        (expand-file-name "tools/man.conf" templates-loc)
   librarian--man-cache-dir                     (expand-file-name ".temp" doom-user-dir)
 
-  librarian-tag-mode-substitution-sources      (expand-file-name "~/.config/bibliography/tags/substitutions")
-  librarian-tag-mode-main-loc                  (expand-file-name "~/.config/bibliography/.temp/tags/canon.tags")
+  librarian-tag-mode-substitution-sources      (expand-file-name "~/.config/homepage/submodules_/tags/substitutions")
+  librarian-tag-mode-main-loc                  (expand-file-name "~/.config/homepage/submodules_/tags/.temp/tags/canon.tags")
   librarian--browse-default "vivaldi.vivaldi-stable"
   )
 (speckler-add! online-search ()

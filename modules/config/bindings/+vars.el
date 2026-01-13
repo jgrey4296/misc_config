@@ -1,10 +1,5 @@
 ;;; util/bindings/+vars.el -*- lexical-binding: t; -*-
 
-(defvar jg-global-map (make-keymap))
-
-(defvar jg-binding-halting-keymap (list 'keymap (make-char-table 'halt #'ignore)))
-
-(defvar jg-ctl-x-map (make-sparse-keymap))
 
 (setq-default which-key-show-operator-state-maps t)
 

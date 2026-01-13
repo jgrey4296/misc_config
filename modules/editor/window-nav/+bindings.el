@@ -13,16 +13,17 @@
       :desc "Load Bookmarks"              "l" #'+jg-nav-bookmarks-load
       )
 
-(map! :map jg-binding-jump-map
+(map! :map jgb-jump--root-map
       :desc "Jump to Window"  "w" #'switch-window
       )
 
-(map! :map jg-binding-helm-map
+(map! :map jge-helm-map
       :desc "Firefox Helm"    "f" #'+jg-nav-helm-bookmarks
       )
 
 (map! :leader
       (:prefix "w"
+       :desc "2 Column Right"    "2" #'+jg-windows-2-col-right
        :desc "3 Column Centered" "3" #'+jg-windows-3-col-centered
        :desc "Reserve" "r"           #'+jg-windows-toggle-dedicated
        )

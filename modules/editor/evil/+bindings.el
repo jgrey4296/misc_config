@@ -2,127 +2,77 @@
 ;; Reminder: evil-mode-map-alist
 
 (dlog! "Setting up Evil Bindings: %s" (current-time-string))
-;;-- setup
 
-(defvar jg-binding-insert-state-map             (copy-keymap evil-insert-state-map))
+(suppress-keymap jge-motion-state-map)
 
-(defvar jg-binding-replace-state-map            (make-keymap))
-(set-keymap-parent jg-binding-replace-state-map jg-binding-insert-state-map)
-
-(defvar jg-binding-motion-state-map             (make-sparse-keymap "JG map replacing evil-motion-state-map"))
-
-(defvar jg-binding-normal-state-map             (make-sparse-keymap "JG map replacing evil-normal-state-map"))
-
-(defvar jg-binding-operator-state-map           (make-sparse-keymap "JG map replacing evil-operator-state-map"))
-
-(defvar jg-binding-visual-state-map             (make-sparse-keymap "JG map replacing evil-visual-state-map"))
-
-(defvar jg-binding-jump-map                     (make-sparse-keymap))
-
-(defvar jg-binding-backward-operator-motion-map (make-sparse-keymap))
-
-(defvar jg-binding-forward-operator-motion-map  (make-sparse-keymap))
-
-(defvar jg-binding-backward-general-motion-map  (make-sparse-keymap))
-
-(defvar jg-binding-forward-general-motion-map   (make-sparse-keymap))
-
-(defvar jg-binding-inner-text-objects-map       (make-sparse-keymap))
-
-(defvar jg-binding-outer-text-objects-map       (make-sparse-keymap))
-
-(defvar jg-binding-helm-map                     (make-sparse-keymap))
-
-(defvar jg-binding-operator-map                 (make-sparse-keymap))
-
-(defvar jg-binding-vision-map                   (make-sparse-keymap))
-
-(defvar jg-binding-change-map                   (make-sparse-keymap))
-
-(suppress-keymap jg-binding-motion-state-map)
-;;-- end setup
-
-(map! :map jg-binding-change-map
-      (:prefix ("w" . "words"))
-      (:prefix ("e" . "encode"))
-      (:prefix ("i" . "lines"))
-      (:prefix ("o" . "text"))
-      )
-
-(local-load! "+insert.el")
-(local-load! "+jump.el")
-(local-load! "+motion.el")
-(local-load! "+normal.el")
-(local-load! "+operator.el")
-(local-load! "+text-objs.el")
-(local-load! "+vision.el")
-(local-load! "+visual.el")
+(local-load! "+bind-insert.el")
+(local-load! "+bind-jump.el")
+(local-load! "+bind-motion.el")
+(local-load! "+bind-normal.el")
+(local-load! "+bind-operator.el")
+(local-load! "+bind-text-objs.el")
+(local-load! "+bind-vision.el")
+(local-load! "+bind-visual.el")
 
 ;;-- stitching together
-(map! :map jg-binding-normal-state-map
-      :desc "Do Ops"        "g"   jg-binding-operator-map
-      :desc "Visual Ops"    "z"   jg-binding-vision-map
-      :desc "B Motion"      "["   jg-binding-backward-general-motion-map
-      :desc "F Motion"      "]"   jg-binding-forward-general-motion-map
-      :desc "Jumping"       "s"   jg-binding-jump-map
-      :desc "Change"        "c"   jg-binding-change-map
+(map! :map jge-normal-state-map
+      :desc "Do Ops"        "g"   jge-operator-map
+      :desc "Visual Ops"    "z"   jge-vision-map
+      :desc "Jumping"       "s"   jge-jump-map
       )
 
-(map! :map jg-binding-visual-state-map
-      :desc "Do Ops"       "g"  jg-binding-operator-map
-      :desc "Visual Ops"   "z"  jg-binding-vision-map
-      :desc "Inner Select" "i"  jg-binding-inner-text-objects-map
-      :desc "Outer Select" "o"  jg-binding-outer-text-objects-map
-      :desc "Jumping"      "s"  jg-binding-jump-map
-      :desc "Change"       "c"  jg-binding-change-map
+(map! :map jge-visual-state-map
+      :desc "Do Ops"       "g"  jge-operator-map
+      :desc "Visual Ops"   "z"  jge-vision-map
+      :desc "Inner Select" "i"  jge-inner-txtobj-map
+      :desc "Outer Select" "o"  jge-outer-txtobj-map
+      :desc "Jumping"      "s"  jge-jump-map
       )
 
-(map! :map jg-binding-motion-state-map
-      :desc "Backward Motion Op"  "["  jg-binding-backward-operator-motion-map
-      :desc "Forward Motion Op"   "]"  jg-binding-forward-operator-motion-map
+(map! :map jge-motion-state-map
+      :desc "Backward Motion Op"  "["  jge-b-op-motion-map
+      :desc "Forward Motion Op"   "]"  jge-f-op-motion-map
       )
 
-(map! :map jg-binding-operator-state-map
-      :desc "Backward Motion Op"  "["  jg-binding-backward-operator-motion-map
-      :desc "Forward Motion Op"   "]"  jg-binding-forward-operator-motion-map
-      :desc "Inner Select"        "i"  jg-binding-inner-text-objects-map
-      :desc "Outer Select"        "o"  jg-binding-outer-text-objects-map
+(map! :map jge-operator-state-map
+      :desc "Backward Motion Op"  "["  jge-b-op-motion-map
+      :desc "Forward Motion Op"   "]"  jge-f-op-motion-map
+      :desc "Inner Select"        "i"  jge-inner-txtobj-map
+      :desc "Outer Select"        "o"  jge-outer-txtobj-map
       )
 
 ;; Override default evil maps
 (dlog! "Finalising Evil bindings: %s" (current-time-string))
+
 ;; Override
-(setq evil-normal-state-map       jg-binding-normal-state-map
-      evil-insert-state-map       jg-binding-insert-state-map
-      evil-replace-state-map      jg-binding-replace-state-map
-      evil-visual-state-map       jg-binding-visual-state-map
-      evil-operator-state-map     jg-binding-operator-state-map
-      evil-motion-state-map       jg-binding-motion-state-map
-      evil-inner-text-objects-map jg-binding-inner-text-objects-map
-      evil-outer-text-objects-map jg-binding-outer-text-objects-map
+(setq evil-normal-state-map       jge-normal-state-map
+      evil-insert-state-map       jge-insert-state-map
+      evil-replace-state-map      jge-replace-state-map
+      evil-visual-state-map       jge-visual-state-map
+      evil-operator-state-map     jge-operator-state-map
+      evil-motion-state-map       jge-motion-state-map
+      evil-inner-text-objects-map jge-inner-txtobj-map
+      evil-outer-text-objects-map jge-outer-txtobj-map
       )
 
 ;; Refresh
 (setq evil-global-keymaps-alist
-'((evil-emacs-state-minor-mode    . evil-emacs-state-map)
-  (evil-motion-state-minor-mode   . evil-motion-state-map)
-  (evil-replace-state-minor-mode  . evil-replace-state-map)
-  (evil-operator-state-minor-mode . evil-operator-state-map)
-  (evil-visual-state-minor-mode   . evil-visual-state-map)
-  (evil-insert-state-minor-mode   . evil-insert-state-map)
-  (evil-normal-state-minor-mode   . evil-normal-state-map)))
-
-(global-set-key (kbd "<backtab>")       #'evil-normal-state)
+      '((evil-emacs-state-minor-mode    . evil-emacs-state-map)
+        (evil-motion-state-minor-mode   . evil-motion-state-map)
+        (evil-replace-state-minor-mode  . evil-replace-state-map)
+        (evil-operator-state-minor-mode . evil-operator-state-map)
+        (evil-visual-state-minor-mode   . evil-visual-state-map)
+        (evil-insert-state-minor-mode   . evil-insert-state-map)
+        (evil-normal-state-minor-mode   . evil-normal-state-map)
+        )
+      )
 
 ;;-- end stitching together
 
-(map! :map evil-insert-state-map
-      "£" (cmd! (insert "#"))
-      "#" (cmd! (insert "£"))
-      )
+(global-set-key (kbd "<backtab>")       #'evil-normal-state)
 
 (map! :leader
-      :desc "Search/Jump"  "s"    jg-binding-jump-map
+      :desc "Search/Jump"  "s"    jgb-jump-non-map
       :desc "Evil States"  "a"    #'+jg-evil-state-ivy
       :desc "Record Macro" "SPC"  #'evil-record-macro
       :desc "Switch to last buffer" "TAB" #'evil-switch-to-windows-last-buffer

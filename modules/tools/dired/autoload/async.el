@@ -1,7 +1,11 @@
 ;;; async.el -*- lexical-binding: t; -*-
+
 (defvar jg-dired-du-cmd "du")
+
 (defvar jg-dired-du-args '("-hsc"))
 
+;; TODO add a notify result to sentinels
+;;
 (defun +jg-dired-async-delete-sentinel (buffer out-buffer process event)
   (when (string-equal "finished\n" event)
     (with-current-buffer buffer
@@ -121,7 +125,6 @@
     )
   )
 
-
 ;;;###autoload
 (defun +jg-dired-scan-files ()
   (interactive)
@@ -211,26 +214,3 @@
      )
     )
   )
-
-;;;###autoload
-(defun +jg-dired-async-list-zip-files ()
-  "List the files contained in a zip file"
-  (interactive)
-  (let* ((marked (ensure-list (dired-get-marked-files)))
-         (target-buffer (get-buffer-create "*Zip Files*"))
-         )
-    (with-current-buffer target-buffer
-      (erase-buffer)
-      (insert "\n--- Files Contained In Zip Archives:\n")
-      )
-    (make-process :name "zipfileslist"
-                  :buffer target-buffer
-                  :command (append (list "zipinfo") marked)
-                  :sentinel (-partial '(lambda (targ p e) (when (not (process-live-p p))
-                                                            (with-current-buffer targ (insert "\n---- Finished ----\n"))
-                                                            (display-buffer targ)))
-                                      target-buffer)
-                  :noquery t
-                  )
-    )
-)

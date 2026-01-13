@@ -2,9 +2,7 @@
 
 ;; Clean up after magit by killing leftover magit buffers and reverting
 ;; affected buffers (or at least marking them as need-to-be-reverted).
-;;-- <leader> g --- git
-(map! :leader
-      :prefix ("g" . "git")
+(map! :leader :prefix ("g" . "git")
       :desc "Clifflog generate"           "1"      #'git-cliff-menu
       :desc "Add To Changelog"            "a"      #'add-change-log-entry-other-window
       :desc "Yank Homepage URL"           "h"      #'+jg-vc-yank-homepage
@@ -131,15 +129,6 @@
       :nv "gd" #'magit-jump-to-diffstat-or-diff
       )
 
-(map! :map git-timemachine-mode-map ;; Git Timemachine
-      :after git-timemachine
-      :n "[ g" #'git-timemachine-show-previous-revision
-      :n "] g" #'git-timemachine-show-next-revision
-
-      :n "gb"  #'git-timemachine-blame
-      :n "gtc" #'git-timemachine-show-commit
-      )
-
 (map! :map evil-conflict-merge-state-map
       :after conflict-merge-state
       :desc "Next Conflict"  "j"   #'smerge-next
@@ -149,6 +138,15 @@
       :desc "Choose"         "RET" #'smerge-keep-current
       :desc "Quit"           "q"   #'evil-normal-state
       doom-leader-key doom-leader-map
+      )
+
+(map! :map git-timemachine-mode-map ;; Git Timemachine
+      :after git-timemachine
+      :n "[ g" #'git-timemachine-show-previous-revision
+      :n "] g" #'git-timemachine-show-next-revision
+
+      :n "gb"  #'git-timemachine-blame
+      :n "gtc" #'git-timemachine-show-commit
       )
 
 ;; All forge list modes are derived from `forge-topic-list-mode'

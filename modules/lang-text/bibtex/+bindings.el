@@ -138,7 +138,7 @@
 ;;-- end reftex
 
 ;;-- helm
-(map! :map jg-binding-helm-map
+(map! :map jge-helm-map
       :desc "Bibtex Ivy"                "b" #'ivy-bibtex
       :desc "Bibtex Helm"               "B" #'+jg-bibtex-helm-bibtex
       :desc "Bibtex Local"              "l" #'ivy-bibtex-with-local-bibliography

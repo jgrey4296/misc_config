@@ -9,4 +9,4 @@
       (:prefix ("b" . "Buffer"))
 )
 
-(provide 'jg_bindings_core)
+(provide 'jg-bindings-core)

@@ -6,6 +6,7 @@
   )
 
 (speckler-setq! librarian ()
+  librarian--browse-variants-file              (expand-file-name "~/.cache/browser-list")
   librarian-regular-loc                        (expand-file-name "urls" templates-loc)
   librarian-insert-loc                         (expand-file-name "general-insert" templates-loc)
   librarian--config-modules-dir                (expand-file-name "modules" doom-user-dir)

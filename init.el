@@ -12,6 +12,8 @@
  :config     ui ;; +light
 
  ;; :experimentation
+ ;;:experimentation blood-bind
+
  :ui (ivy) ;; +prescient +fuzzy
  :ui helm hydra ibuffer minibuffer
  :ui popup ;; +poppy
@@ -60,6 +62,7 @@
  :lang-weakly-typed erlang-vms godot
  :lang-weakly-typed ruby ;; +rbenv +rvm +chruby
 
+ :tools rss
  :tools pdfs ledger
  :tools mail term eval
  :tools processes

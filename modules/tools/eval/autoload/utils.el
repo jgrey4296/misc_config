@@ -23,10 +23,11 @@
 
 ;;;###autoload
 (defun +jg-eval--pair-cmds (&rest cmds)
-  " for each pair, set the `cmd` text-property of car to cdr
+  "for each pair, set the `cmd` text-property of car to cdr
 can also add key'd additional properties
 "
   (cl-loop for val-lst in cmds
+           when val-lst
            collect
            (let ((usr-str (car val-lst))
                  (cmd (cadr val-lst))

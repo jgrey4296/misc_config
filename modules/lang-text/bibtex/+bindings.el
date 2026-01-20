@@ -165,6 +165,14 @@
 
 ;;-- end evil-ex
 
+(map! :map bibtex-mode-map
+      :nv "c" jgb-change--text-map
+      :n  "z" jgb-vision--text-map
+      :n  "s" jgb-jump--text-map
+      :nv "[" jgb-motion--text-b-map
+      :nv "]" jgb-motion--text-f-map
+      )
+
 (after! bibtex
   (setq bibtex-mode-map jg-bibtex-mode-map)
   )

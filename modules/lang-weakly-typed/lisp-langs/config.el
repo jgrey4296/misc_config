@@ -184,3 +184,9 @@
 (speckler-add! treesit-source ()
   '(elisp         "git@github.com:wilfred/tree-sitter-elisp.git")
   )
+
+(speckler-add! compile-commands ()
+  `(emacs-lisp
+    #'+jg-lisp-compile-commands
+    )
+  )

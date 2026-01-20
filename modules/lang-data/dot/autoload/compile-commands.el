@@ -1,7 +1,8 @@
 ;;; commands.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +jg-dot-get-commands (&optional dir)
+(defun +jg-dot-compile-commands (&optional dir)
+  "get compile commands for graphviz"
   (interactive)
   (-when-let* ((filename (buffer-file-name))
                (is-dot (f-ext? filename "dot"))
@@ -39,8 +40,9 @@
 ;;;###autoload
 (defun +jg-dot-set-ext ()
   (interactive)
-  (setq graphviz-dot-preview-extension (ivy-read "Graphviz Output Format: "
-                                                 '("gif" "png" "jpg" "svg")
-                                                 :require-match t
-                                                 ))
+  (setq graphviz-dot-preview-extension
+        (ivy-read "Graphviz Output Format: "
+                  '("gif" "png" "jpg" "svg")
+                  :require-match t
+                  ))
   )

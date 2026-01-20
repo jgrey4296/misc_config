@@ -115,6 +115,7 @@
   warning-suppress-types ;; Don't Show, silently added to warnings buffer
   '((defvaralias losing-value python-shell-interpreter)
     (defvaralias losing-value rustic-indent-method-chain)
+    (direnv)
     (org-element org-element-cache)
     (org-element org-element-parser)
     (bytecomp)

@@ -65,7 +65,7 @@
                :close-all  #'(lambda () (hs-hide-level 0))
                :toggle     #'hs-toggle-hiding
                :open       #'hs-show-block
-               :open-rec   nil
+               :open-rec   #'hs-hide-level
                :close      #'hs-hide-block
                )
     )

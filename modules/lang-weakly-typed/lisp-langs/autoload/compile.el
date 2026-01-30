@@ -8,6 +8,7 @@
         )
      (list
       (format "eask test buttercup %s -- %s" (f-parent curr-file) (f-filename curr-file))
+      (format "eask test buttercup %s" (f-parent curr-file))
       (format "eask test buttercup %s" dir)
       "eask test buttercup"
       "eask install-deps --dev"

@@ -35,7 +35,6 @@
     )
   )
 (speckler-add! fold ()
-  :override nil
   `(lisp
     :modes (emacs-lisp-mode lisp-mode)
     :priority 125
@@ -43,7 +42,10 @@
                :close-all #'hs-hide-all
                :toggle    #'hs-toggle-hiding
                :open      #'hs-show-block
-               :open-rec  nil
+               :open-rec  #'(lambda ()
+                              (interactive)
+                              (hs-hide-level (read-number "Level: "))
+                              )
                :close     #'hs-hide-block
                )
     )

@@ -14,6 +14,7 @@
       :desc "Insert Fold block" "1" #'code-shy-wrap-block
 
       :desc "open-fold-rec" "A"   #'evil-open-fold-rec
+      :desc "open-fold-rec" "/"   #'evil-open-fold-rec
       :desc "toggle-fold"   "a"   #'evil-toggle-fold
       :desc "open-folds"    "o"   #'evil-open-folds
       :desc "Close Folds"   "m"   #'evil-close-folds
@@ -26,6 +27,7 @@
       :desc "Mark Outline Subtree" "' o" #'outline-mark-subtree
       ;; TODO fold string
 )
+
 (map! :map jgb-vision--root-map
       :after vimish-fold
       :prefix ("v" . "Vimish Fold")

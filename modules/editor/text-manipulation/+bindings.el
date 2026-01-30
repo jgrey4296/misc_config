@@ -57,7 +57,7 @@
       "#" (cmd! (insert "£"))
       )
 
-(map! :map (prog-mode-map text-mode-map)
+(map! :map (prog-mode-map text-mode-map conf-mode-map)
       :nv "c" jgb-change--text-map
       :n  "z" jgb-vision--text-map
       :n  "s" jgb-jump--text-map

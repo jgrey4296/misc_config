@@ -100,7 +100,7 @@
   py-python-command             "python3"
   py-python-command-args        '("-i")
   py-sexp-use-expression-p              nil
-  py-shell-virtualenv-root      (if (boundp 'conda-env-home-directory) conda-env-home-directory nil)
+  py-shell-virtualenv-root      nil
   py-split-window-on-execute    t
   py-trailing-whitespace-smart-delete-p nil
   py-use-font-lock-doc-face-p           t

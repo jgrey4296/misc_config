@@ -246,16 +246,6 @@
   jg-python-repl-start-file (expand-file-name "python/repl_startup.py " templates-loc)
   jg-python-coverage-file-loc ".temp/coverage"
 )
-(speckler-setq! conda ()
-  conda-anaconda-home (or (getenv "MAMBA_ROOT_PREFIX") (getenv "ANACONDA_HOME") "/usr/local/anaconda3")
-  conda-env-home-directory (cond ((getenv "MAMBA_ROOT_PREFIX")
-                                  (f-join (getenv "MAMBA_ROOT_PREFIX") "envs"))
-                                 ((getenv "ANACONDA_ENVS")
-                                  (getenv "ANACONDA_ENVS"))
-                                 (t
-                                  (f-join conda-anaconda-home "envs"))
-                                 )
-  )
 
 (when (executable-find "Microsoft.Python.LanguageServer")
   (speckler-add! eglot ()

@@ -6,7 +6,6 @@
   :init
 
   (speckler-add! lib-env ()
-    :override t
     `(mamba
       :lang 'python
       :start #'jg-py-mamba-start-env

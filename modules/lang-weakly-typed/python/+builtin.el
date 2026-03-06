@@ -154,7 +154,7 @@
   python-shell-interpreter          "python3"
   python-shell-interpreter-args     "-i"
 
-  python-shell-virtualenv-root (if (boundp 'conda-env-home-directory) conda-env-home-directory nil)
+  python-shell-virtualenv-root nil
   python-indent-guess-indent-offset                     nil
   python-shell-completion-native-enable                 nil
   python-shell-completion-native-disabled-interpreters  '("pypy")

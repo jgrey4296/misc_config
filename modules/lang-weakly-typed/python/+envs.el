@@ -10,7 +10,6 @@
   (add-hook 'pyvenv-pre-deactivate-hooks #'+modeline-clear-env-in-all-windows-h)
 
   (speckler-add! lib-env ()
-    :override t
     `(venv
       :lang 'python
       :start #'jg-py-venv-start
@@ -33,7 +32,6 @@
   )
 
 (speckler-add! lib-env ()
-  :override t
   `(mypy
     :lang 'python
     :start #'jg-python-update-mypy-path

@@ -30,7 +30,7 @@
 (speckler-setq! lsp-py-pyright ()
   ;; Pyright
   lsp-pyright-extra-paths #'[]
-  lsp-pyright-venv-path conda-env-home-directory
+  lsp-pyright-venv-path nil
   lsp-pyright-log-level "Information" ;; Error Warning Information Trace
   lsp-pyright-typechecking-mode "basic"
   )
@@ -46,7 +46,6 @@
   lsp-ruff-ruff-args                    nil
   )
 (speckler-setq! lsp-py-pylsp ()
-  :override t
   ;; pylsp
   lsp-pylsp-configuration-sources []
   lsp-pylsp-server-command '("pylsp")

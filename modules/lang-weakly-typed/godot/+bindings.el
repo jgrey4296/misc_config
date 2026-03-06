@@ -2,8 +2,8 @@
 
 (map! :map gdscript-mode-map
       :localleader
-
-      )
+      "TAB" #'+jg-gd-swap-ts
+    )
 
 (map! :localleader
         :map gdscript-mode-map

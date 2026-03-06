@@ -1,8 +1,6 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-(setq gdscript-use-tab-indents nil
-
-      )
+(setq gdscript-use-tab-indents nil)
 
 (speckler-add! file-templates ()
   '(gdscript-mode
@@ -16,11 +14,11 @@
     ("\\.tres\\'" . conf-toml-mode)
     )
   )
-(speckler-add! doc-lookup ()
-  `(gdscript-mode
-    :documentation #'gdscript-docs-browse-symbol-at-point
-    )
-  )
+;; (speckler-add! doc-lookup ()
+;;   `(gdscript-mode
+;;     :documentation #'gdscript-docs-browse-symbol-at-point
+;;     )
+;;   )
 (speckler-add! treesit-source ()
   '(gdscript      "git@github.com:PrestonKnopp/tree-sitter-gdscript.git")
   '(glsl          "git@github.com:tree-sitter-grammars/tree-sitter-glsl.git")

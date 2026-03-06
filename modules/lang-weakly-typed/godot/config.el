@@ -30,9 +30,27 @@
   :commands gdscript-mode
   :config
 
-  (add-hook! 'gdscript-mode-hook #'librarian--insert-minor-mode)
+  (add-hook! 'gdscript-mode-hook
+             #'jg-gd-font-lock-mod-h
+             #'librarian--insert-minor-mode
+             )
   (add-hook! 'gdscript-ts-mode-hook #'librarian--insert-minor-mode)
   (add-hook! 'gdscript-ts-mode-hook #'treesit-fold-mode)
 
   )
+
+(use-package! lsp-gdscript
+  :after lsp-mode
+  :config
+  (add-hook! 'gdscript-mode-hook #'lsp!)
+  )
+
+(speckler-add! lib-env ()
+  '(lsp-godot
+    :setup #'(lambda (state &rest args)
+               (require 'lsp-gdscript)
+               )
+    )
+  )
+
 ;;; config.el ends here

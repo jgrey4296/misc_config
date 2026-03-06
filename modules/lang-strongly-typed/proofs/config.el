@@ -1,6 +1,6 @@
 ;;; lang/coq/config.el -*- lexical-binding: t; -*-
 
-(when (modulep! +coq) (local-load! "+coq"))
+(when (modulep! +rocq) (local-load! "+rocq"))
 (when (modulep! +agda) (local-load! "+agda"))
 (when (modulep! +idris) (local-load! "+idris"))
 (when (modulep! +fstar) (local-load! "+fstar"))

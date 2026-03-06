@@ -6,6 +6,14 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
+(after! smartparens-ml
+  (sp-with-modes '(tuareg-mode fsharp-mode)
+    (sp-local-pair "(*" "*)" :actions nil)
+    (sp-local-pair "(*" "*"
+                   :actions '(insert)
+                   :post-handlers '(("| " "SPC") ("|[i]*)[d-2]" "RET"))))
+  )
+
 (use-package! utop
     :after tuareg
     :hook (tuareg-mode-local-vars . +ocaml-init-utop-h)

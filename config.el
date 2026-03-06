@@ -102,7 +102,6 @@
 (setq warning-suppress-types '((bytecomp)))
 
 (speckler-setq! warnings ()
-  :override nil
   warning-suppress-log-types ;; Full Suppress
   '((defvaralias losing-value woman-topic-history)
     (defvaralias losing-value rustic-indent-method-chain)
@@ -116,6 +115,7 @@
   '((defvaralias losing-value python-shell-interpreter)
     (defvaralias losing-value rustic-indent-method-chain)
     (direnv)
+    (lsp-mode)
     (org-element org-element-cache)
     (org-element org-element-parser)
     (bytecomp)

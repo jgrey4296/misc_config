@@ -10,7 +10,7 @@
       :desc "Scroll Left"   "h"   #'evil-scroll-column-left
 
       :desc "Center" "z"          #'evil-scroll-line-to-center
-      :desc "Top"    "t"          #'evil-scroll-line-to-top
+      :desc "Top"    "t"          #'+jg-evil-offset-line-to-top
       :desc "Bottom" "b"          #'evil-scroll-line-to-bottom
 
       (:prefix ("'" . "Highlight")) ;; Reserved

@@ -54,8 +54,8 @@
          (vcs      (| (: ?. (| (:"git" (? "ignore")) "svn" ))))
          (workflows (: ?. (| "github" "cargo")))
          (misc-files (: (| "LICENSE"
-                           "CHANGELOG"
-                           "README"
+                           ;; "CHANGELOG"
+                           ;; "README"
                            "repo-layout"
                            )
                         (? ?. filename)))

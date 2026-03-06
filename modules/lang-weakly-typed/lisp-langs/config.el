@@ -104,10 +104,6 @@
     :definition    #'+racket-lookup-definition
     :documentation #'+racket-lookup-documentation
     )
-  '(inferior-emacs-lisp-mode
-    :definition    #'+emacs-lisp-lookup-definition
-    :documentation #'+emacs-lisp-lookup-documentation
-    )
   )
 (speckler-add! ligatures ()
   '(emacs-lisp-mode

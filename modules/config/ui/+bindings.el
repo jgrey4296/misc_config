@@ -30,7 +30,7 @@
        :desc "Rotate Windows"              "\\"    #'+jg-ui-window-rotate-forward
       )
 
-(map! :map jgb-vision-text-map
+(map! :map jgb-vision--text-map
       :desc "Toggle narrowing"            "="   #'+jg-ui-toggle-narrow-buffer
       :desc "Indirect Narrow"             "RET" #'+jg-ui-indirect-narrow-around-point
       :desc "Refresh Highlighting"        "u"   #'+jg-ui-refresh-highlighting
@@ -38,7 +38,7 @@
       )
 
 ;;-- highlight
-(map! :map jgb-vision-text-map
+(map! :map jgb-vision--text-map
       :desc "Delete Change Highlight"      "c" #'highlight-changes-remove-highlight
       :prefix ("'" . "Highlight")
        :desc  "symbol-at-point"            "." #'hi-lock-face-symbol-at-point

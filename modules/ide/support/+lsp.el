@@ -108,7 +108,7 @@
   )
 
 (use-package! lsp-ui
-  :commands (lsp-ui-doc-mode lsp-ui-imenu lsp-ui-sideline-mode)
+  :after lsp-mode
   )
 
 (use-package! lsp-ivy

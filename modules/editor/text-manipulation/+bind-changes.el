@@ -40,7 +40,11 @@
       :prefix "w"
       :desc "inflection" "i"    #'evil-operator-string-inflection
       :desc "Rotate"     "r"    #'rotate-text
+      :desc "Thesaurus"  "t"    #'powerthesaurus-lookup-dwim
+      :desc "Wordnut"    "w"    #'wordnut-search
        )
+
+
 
 (map! :map jgb-change--text-map ;; Encoding
       :prefix "e"

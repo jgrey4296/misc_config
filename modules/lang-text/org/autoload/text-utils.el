@@ -14,7 +14,10 @@
 
 ;;;###autoload
 (defun +jg-org-change-link-name (name)
-  " Change the name of a link "
+  " Change the name of a link
+
+TODO: handle when there isnt' a name.
+"
   (interactive "s")
   (let ((re org-link-bracket-re))
     (save-excursion

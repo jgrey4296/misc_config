@@ -35,6 +35,25 @@
         )
   )
 
+;;;###autoload
+(defun +jg-evil-offset-line-to-top (&optional arg)
+  (interactive)
+  (let ((curr (count-lines (point-min) (point)))
+        (offset (or arg 10))
+        )
+    (save-excursion
+      (evil-scroll-line-to-top
+       (pcase (1+ (- curr offset))
+         ((and x (guard (< x 0))) curr)
+         (x x)
+         )
+       )
+      )
+    )
+  )
+
+
+
 ;;-- Footer
 ;; Copyright (C) 2024 john
 ;;

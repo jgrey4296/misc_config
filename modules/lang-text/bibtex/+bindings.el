@@ -4,6 +4,14 @@
 (dlog! "Setting up bibtex bindings: %s" (current-time-string))
 ;; (evil-make-overriding-map jg-bibtex-mode-map)
 
+(map! :map bibtex-mode-map
+      :nv "c" jgb-change--text-map
+      :n  "z" jgb-vision--text-map
+      :n  "s" jgb-jump--text-map
+      :nv "[" jgb-motion--text-b-map
+      :nv "]" jgb-motion--text-f-map
+      )
+
 ;;-- bibtex-mode
 (map! :map jg-bibtex-mode-map ;; main
       :n "=" (cmd! (org-bibtex-read-buffer (current-buffer)))
@@ -19,8 +27,8 @@
 
       :desc "Select Entry"       :v "i e"     #'librarian--biblio-edit-visual-select-entry
 
-      :n "[" #'evil-backward-section-begin
-      :n "]" #'evil-forward-section-begin
+      ;; :n "[" #'evil-backward-section-begin
+      ;; :n "]" #'evil-forward-section-begin
       )
 
 (map! :map jg-bibtex-mode-map ;; jump bindings
@@ -165,13 +173,6 @@
 
 ;;-- end evil-ex
 
-(map! :map bibtex-mode-map
-      :nv "c" jgb-change--text-map
-      :n  "z" jgb-vision--text-map
-      :n  "s" jgb-jump--text-map
-      :nv "[" jgb-motion--text-b-map
-      :nv "]" jgb-motion--text-f-map
-      )
 
 (after! bibtex
   (setq bibtex-mode-map jg-bibtex-mode-map)

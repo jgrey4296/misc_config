@@ -19,8 +19,8 @@
 
 (package! tree-sitter)
 (package! tree-sitter-indent)
-(package! tree-sitter-langs :pin "213b1c4db852a97480e029453af869ff1a0764e0")
-(package! ts-fold :pin "01c9ecaaa89966cdcd250ac37c24a9c9f530b725" :recipe (:host github :repo "emacs-tree-sitter/ts-fold"))
+(package! tree-sitter-langs)
+(package! ts-fold)
 
 
 (package! counsel-gtags)

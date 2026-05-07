@@ -16,11 +16,11 @@
 (package! company-stan)
 (package! flycheck-stan)
 
-(package! julia-mode :pin "7aafa8e77df64a47fa4729a0c1ea572b5bc8e30e")
-(package! julia-repl :pin "57a15dfafed680ad7d81f779d414e8cb6717417c")
+(package! julia-mode)
+(package! julia-repl)
 
-(package! eglot-jl :pin "2e04597223553a369dd5b6520b6365b41e6ea508")
-(package! lsp-julia :pin "d6688bb131ff4a5a0201f6d3826ef0b018265389")
+(package! eglot-jl)
+(package! lsp-julia)
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

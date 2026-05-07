@@ -3,7 +3,7 @@
 
 (package! yasnippet)
 (package! auto-yasnippet)
-(package! doom-snippets :recipe (:host github :repo "doomemacs/snippets" :files (:defaults "*")))
+(package! doom-snippets)
 (package! yasnippet-snippets)
 (package! academic-phrases)
 (package! license-templates)

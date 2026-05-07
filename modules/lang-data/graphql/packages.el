@@ -3,4 +3,4 @@
 
 (package! graphql-mode)
 (package! graphql-doc)
-(package! company-graphql :recipe (:host github :repo "thaenalpha/company-graphql"))
+(package! company-graphql)

@@ -19,13 +19,13 @@
 (package! helm-wordnet)
 (package! synosaurus)
 
-(package! librarian :recipe (:host github :repo "jgrey4296/librarian"))
+(package! librarian)
 
-(package! librarian-tag-helm :recipe (:host github :repo "jgrey4296/misc-modes" :files ("minor-modes/librarian-tag-helm/*.el") :local-repo "misc-modes"))
-(package! librarian-tag-ivy  :recipe (:host github :repo "jgrey4296/misc-modes" :files ("minor-modes/librarian-tag-ivy/*.el") :local-repo "misc-modes"))
+(package! librarian-tag-helm)
+(package! librarian-tag-ivy)
 
-(package! rawtag-mode  :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/tag-modes/rawtag-mode.el") :local-repo "misc-modes"))
-(package! subfile-mode :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/tag-modes/subfile-mode.el") :local-repo "misc-modes"))
+(package! rawtag-mode)
+(package! subfile-mode)
 
 (package! dumb-jump)
 

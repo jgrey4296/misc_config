@@ -21,11 +21,9 @@
 (package! font-lock :built-in t)
 (package! font-lock-ext)
 (package! font-lock-studio)
-(package! font-lock+       :recipe (:host github :repo "emacsmirror/font-lock-plus"))
+(package! font-lock+)
 
-(package! transient
-  :recipe (:host github :repo "magit/transient" :branch "main")
-  :pin "453376f2f1...")
+(package! transient)
 
 (package! treemacs)
 (package! treemacs-evil)

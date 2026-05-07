@@ -20,7 +20,7 @@
 ;;
 ;;; Code:
 
-(package! vertico :recipe (:host github :repo "minad/vertico" :files ("*.el" "extensions/*.el")))
+(package! vertico)
 
 
 

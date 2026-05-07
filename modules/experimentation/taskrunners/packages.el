@@ -8,7 +8,7 @@
 
 (package! snakemake-mode)
 (package! taskrunner)
-(package! ivy-taskrunner :recipe (:host github :repo "emacs-taskrunner/ivy-taskrunner"))
+(package! ivy-taskrunner)
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

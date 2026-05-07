@@ -20,7 +20,7 @@
 ;;
 ;;; Code:
 
-(package! logview-mode  :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/logview-mode/*.el")))
+(package! logview-mode)
 
 
 ;;; packages.el ends here

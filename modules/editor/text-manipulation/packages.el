@@ -1,13 +1,13 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; util/text/packages.el
 (package! rotate-text)
-(package! evil-states-plus :recipe (:host github :repo "jgrey4296/evil-states-plus" :includes (mapspace-state spechar-state)))
+(package! evil-states-plus)
 (package! embrace)
 (package! smartparens)
 (package! editorconfig :built-in t)
 (package! writegood-mode)
 (package! accent)
-(package! string-inflection :recipe (:branch "main"))
+(package! string-inflection)
 
 ;; Formatting
 (package! format-all)

@@ -9,4 +9,4 @@
 (package! auto-org-md)
 (package! grip-mode)
 
-(package! evil-markdown :recipe (:host github :repo "Somelauw/evil-markdown"))
+(package! evil-markdown)

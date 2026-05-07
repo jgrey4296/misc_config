@@ -35,9 +35,9 @@
                          "(provide 'org-version)\n")))))
  )
 
-(package! org-contrib :recipe (:host github :repo "emacsmirror/org-contrib"))
+(package! org-contrib)
 
-(package! org-unit-test :recipe (:host github :repo "jgrey4296/misc-modes" :files ("minor-mode/org-unit-test/*.el")))
+(package! org-unit-test)
 
 (package! org-superstar)
 
@@ -46,19 +46,18 @@
 
 (package! avy)
 (package! htmlize)
-(package! org-yt :recipe (:host github :repo "TobiasZawada/org-yt"))
+(package! org-yt)
 (package! ox-clip)
 (package! toc-org)
 (package! org-cliplink)
 
-;; TODO Adjust when this is added to GNU ELPA
-(package! org-contacts :recipe (:host nil :type git :repo "https://repo.or.cz/org-contacts.git"))
+(package! org-contacts)
 
 (when (featurep :system 'macos) (package! org-mac-link))
 
-(package! org-passwords :recipe (:host github :repo "alfaromurillo/org-passwords.el"))
+(package! org-passwords)
 
-(package! evil-org :recipe (:host github :repo "hlissner/evil-org-mode"))
+(package! evil-org)
 (package! orgit)
 (package! orgit-forge)
 (package! org-brain)
@@ -71,30 +70,15 @@
 ;;; Babel
 (package! ob-async)
 (package! ob-elixir)
-(package! ob-fsharp :recipe (:host github :repo "elken/ob-fsharp"))
+(package! ob-fsharp)
 (package! ob-graphql)
-(package! ob-racket :recipe (:host github :repo "DEADB17/ob-racket"))
+(package! ob-racket)
 (package! ob-restclient)
 (package! ob-ammonite)
 
 ;;; Export
 (package! ox-pandoc)
-(package! ox-hugo :recipe (:host github :repo "kaushalmodi/ox-hugo" :nonrecursive t))
+(package! ox-hugo)
 (package! ox-rst)
-(package! ox-epub :recipe (:host github :repo "jgrey4296/misc-modes" :files ("ox-epub/*.el") :local-repo "misc-modes"))
+(package! ox-epub)
 
-;;; Disabled
-(package! org-drill       :disable t)
-(package! org-pomodoro    :disable t)
-(package! org-projectile  :disable t)
-(package! outline-toc     :disable t)
-(package! org-contacts    :disable t)
-(package! org-contrib     :disable t)
-(package! org-crypt       :disable t)
-(package! org-passwords   :disable t)
-(package! org-tree-slide  :disable t)
-(package! org-unit-test   :disable t)
-(package! orgit-forge     :disable t)
-(package! toc-org         :disable t)
-(package! org-brain       :disable t)
-(package! org-cliplink    :disable t)

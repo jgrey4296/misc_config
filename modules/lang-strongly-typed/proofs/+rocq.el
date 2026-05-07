@@ -633,7 +633,11 @@
     ("\\.v\\'" . coq-mode)
     )
   )
-
+(speckler-add! file-templates ()
+  '(rocq
+    ("\\.v\\'"      :trigger "__"  :mode coq-mode)
+    )
+  )
 (speckler-add! fold ()
   `(coq
     :modes coq-mode

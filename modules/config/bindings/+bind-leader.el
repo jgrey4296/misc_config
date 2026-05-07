@@ -19,7 +19,9 @@
       :desc "Universal argument"    "u"   #'universal-argument
 
       ;; 0 6 9 8
+      :desc "Shells"    "5" (cmd! (bookmark-jump "shells"))
       :desc "Agenda"    "7" (cmd! (find-file initial-buffer-choice))
+      :desc "Homepage"    "8" (cmd! (find-file (expand-file-name "~/github/jgrey4296.github.io")))
       )
 
 (map! :leader
